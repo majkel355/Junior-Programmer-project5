@@ -12,10 +12,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     private int score;
     private float spawnRate = 1.0f;
-    
-    
-    
     public bool isGameActive;
+    public Button resetButton;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,8 +31,11 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0,targets.Count);
             Instantiate(targets[index]);
-            isGameActive = true;
         }
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void UpdateScore(int scoreToAdd)
     {
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
        isGameActive = false; 
        gameOverText.gameObject.SetActive(true);
+       resetButton.gameObject.SetActive(true);
  
     }
     // Update is called once per frame
